@@ -467,6 +467,17 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
         }
       }else if( action.equals( "exceptionHandler" )){
 
+      //Subscriber Methods
+      }else if( action.equals( "subscribeToVideo" )){
+        String val = args.getString(0);
+          boolean subscribeToVideo = true;
+          if( val.equalsIgnoreCase("false") ){
+            subscribeToVideo = false;
+          }
+          Log.i(TAG, "setting subscribeToVideo");
+          for (Map.Entry<String, RunnableSubscriber> entry : subscriberCollection.entrySet()){
+            entry.getValue().mSubscriber.setSubscribeToVideo( subscribeToVideo );
+          }
       }
       return true;
     }

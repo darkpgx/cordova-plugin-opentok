@@ -823,7 +823,7 @@ TBSubscriber = (function() {
   };
 
   TBSubscriber.prototype.subscribeToVideo = function(value) {
-    return this;
+    return Cordova.exec(TBSuccess, TBError, OTPlugin, "subscribeToVideo", [value]);
   };
 
   function TBSubscriber(stream, divName, properties) {
