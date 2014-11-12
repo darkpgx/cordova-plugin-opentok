@@ -30,8 +30,11 @@ class TBSubscriber
     return @
   subscribeToAudio: (value) ->
     return @
+
   subscribeToVideo: (value) ->
-    Cordova.exec( TBSuccess, TBError, OTPlugin, "subscribeToVideo", [value] )  
+    subState = String(value)
+    sid = String(@streamId)
+    Cordova.exec( TBSuccess, TBError, OTPlugin, "subscribeToVideo", [subState, sid] ) 
 
   constructor: (stream, divName, properties) ->
     element = document.getElementById(divName)

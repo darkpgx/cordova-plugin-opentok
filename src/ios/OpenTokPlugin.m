@@ -268,6 +268,23 @@
 #pragma mark Subscriber Delegates
 /*** Subscriber Methods
  ****/
+
+- (void)subscribeToVideo:(CDVInvokedUrlCommand*)command{
+    NSString* subscribeToVideo = [command.arguments objectAtIndex:0];
+    NSString* streamId = [command.arguments objectAtIndex:1];
+    NSLog(@"iOS Altering Video publishing state, %@", subscribeToVideo);
+    BOOL subToVideo = YES;
+    if ([subscribeToVideo isEqualToString:@"false"]) {
+        subToVideo = NO;
+    }
+    for ( id key in subscriberDictionary ) {
+        if ([key isEqualToString:streamId]){
+            OTSubscriber* sub = [subscriberDictionary objectForKey:key];
+            [sub setSubscribeToVideo:subToVideo];
+        }
+    }
+}
+
 - (void)subscriberDidConnectToStream:(OTSubscriberKit*)sub{
     NSLog(@"iOS Connected To Stream");
     NSMutableDictionary* eventData = [[NSMutableDictionary alloc] init];
